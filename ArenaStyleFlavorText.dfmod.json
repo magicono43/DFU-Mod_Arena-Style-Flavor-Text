@@ -1,0 +1,13 @@
+{
+    "ModTitle": "ArenaStyleFlavorText",
+    "ModVersion": "1.00",
+    "ModAuthor": "Kirk.O & Cliffworms",
+    "ContactInfo": "kirkoliveri@gmail.com",
+    "DFUnity_Version": "0.13.5",
+    "ModDescription": "Brings Elder Scrolls 1: Arena's flavor-text upon entering a public location that describes the overall feeling of the place depending on weather, season, climate, time of day and building type.",
+    "GUID": "70b718a9-58fc-4fb7-b83d-c1f74f5de663",
+    "Files": [
+        "Assets/Game/Mods/DFU-Mod_Arena-Style-Flavor-Text/Scripts/ArenaStyleFlavorTextMain.cs"
+    ],
+    "Dependencies": []
+}
