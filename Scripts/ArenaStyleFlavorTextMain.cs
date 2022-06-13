@@ -8,6 +8,7 @@
 // Special Thanks:  Cliffworms, Kab the Bird Ranger, Jehuty, Ralzar, and Interkarma
 // Modifier:
 
+using System;
 using DaggerfallConnect;
 using DaggerfallConnect.Arena2;
 using DaggerfallWorkshop;
@@ -18,6 +19,11 @@ using DaggerfallWorkshop.Game.Weather;
 using DaggerfallWorkshop.Utility;
 using DaggerfallWorkshop.Game.Guilds;
 using DaggerfallWorkshop.Game.Utility.ModSupport.ModSettings;
+using DaggerfallWorkshop.Game.Utility;
+using DaggerfallWorkshop.Game.Serialization;
+using System.Collections.Generic;
+using System.Text;
+using DaggerfallWorkshop.Game.UserInterfaceWindows;
 
 namespace ArenaStyleFlavorText
 {
@@ -43,7 +49,7 @@ namespace ArenaStyleFlavorText
         public static int CastleWayTextCooldown { get; set; }
 
         // Global Variables
-        public static ulong LastSeenShopText { get; set; } // atm these values will reset whenever you start the game over, but won't when loading saves I think, so will probably handle this issue later.
+        public static ulong LastSeenShopText { get; set; }
         public static ulong LastSeenTavernText { get; set; }
         public static ulong LastSeenTempleText { get; set; }
         public static ulong LastSeenMagesGuildText { get; set; }
@@ -73,6 +79,8 @@ namespace ArenaStyleFlavorText
 
             mod.LoadSettings();
 
+            StartGameBehaviour.OnStartGame += ResetCooldownValues_OnStartGame;
+            SaveLoadManager.OnLoad += ResetCooldownValues_OnSaveLoad;
             PlayerEnterExit.OnTransitionInterior += ShowFlavorText_OnTransitionInterior;
             PlayerEnterExit.OnTransitionDungeonInterior += ShowFlavorText_OnTransitionDungeonInterior;
 
@@ -95,23 +103,106 @@ namespace ArenaStyleFlavorText
 
         #endregion
 
+        static void ResetCooldownValues_OnStartGame(object sender, EventArgs e)
+        {
+            LastSeenShopText = 0;
+            LastSeenTavernText = 0;
+            LastSeenTempleText = 0;
+            LastSeenMagesGuildText = 0;
+            LastSeenPalaceText = 0;
+            LastSeenCastleDFText = 0;
+            LastSeenCastleSentText = 0;
+            LastSeenCastleWayText = 0;
+        }
+
+        static void ResetCooldownValues_OnSaveLoad(SaveData_v1 saveData)
+        {
+            LastSeenShopText = 0;
+            LastSeenTavernText = 0;
+            LastSeenTempleText = 0;
+            LastSeenMagesGuildText = 0;
+            LastSeenPalaceText = 0;
+            LastSeenCastleDFText = 0;
+            LastSeenCastleSentText = 0;
+            LastSeenCastleWayText = 0;
+        }
+
+        public static TextFile.Token[] TextTokenFromRawString(string rawString, out float textDelay)
+        {
+            var listOfCompLines = new List<string>();
+            int partLength = 115;
+            if (!DaggerfallUnity.Settings.SDFFontRendering)
+                partLength = 65;
+            string sentence = rawString;
+            string[] words = sentence.Split(' ');
+            textDelay = 5f + (words.Length * 0.25f);
+            var parts = new Dictionary<int, string>();
+            string part = string.Empty;
+            int partCounter = 0;
+            foreach (var word in words)
+            {
+                if (part.Length + word.Length < partLength)
+                {
+                    part += string.IsNullOrEmpty(part) ? word : " " + word;
+                }
+                else
+                {
+                    parts.Add(partCounter, part);
+                    part = word;
+                    partCounter++;
+                }
+            }
+            parts.Add(partCounter, part);
+
+            foreach (var item in parts)
+            {
+                listOfCompLines.Add(item.Value);
+            }
+
+            return DaggerfallUnity.Instance.TextProvider.CreateTokens(TextFile.Formatting.JustifyCenter, listOfCompLines.ToArray());
+        }
+
         public void ShowFlavorText_OnTransitionInterior(PlayerEnterExit.TransitionEventArgs args)
         {
             WeatherType weatherType = GetCurrentWeatherType();
             DFLocation.BuildingTypes buildingType = playerEnterExit.BuildingDiscoveryData.buildingType;
             PlayerGPS.DiscoveredBuilding buildingData = playerEnterExit.BuildingDiscoveryData;
 
-            // Start working on this tomorrow, consider HUD text delay time to be determined by amount of words in the text or something, if possible.
-            // Tomorrow, make sure to put under each "rung" of different building type here to define "LastSeenBlankText" values, also when to reset values and such after running, etc. Test also.
-
             ulong currentTimeSeconds = DaggerfallUnity.Instance.WorldTime.DaggerfallDateTime.ToSeconds(); // 15 * 86400 = Number of seconds in 15 days.
 
             TextFile.Token[] tokens = null;
+            // Add another settings that allows for non-HUD text to display and instead use the "pausing messagebox" like the quest pack originally did.
+            // Also add setting for the text reading delay thing.
+            // Continue on this tomorrow, more testing then redoing raw text entries for this, and other features, etc. Start getting closer to this being ready to release.
+
+
+            // Just going to have some testing stuff for trying to mess with text-string and stuff here, completely temporary stuff.
+            TextFile.Token[] tokenTest = null;
+            float textDelay = 5f;
+
+            string inputString = "You enter the audience chamber of " + CityName() + "'s lord. Despite the season, not a ray of sunshine has touched this room. You breath in the musty air and wipe the sweat from your brow as you wait for the lord to finish business with some messengers from " + RemoteTown() + ". The behavior between the lord and the messengers is peculiar, considering the two have been at peace for some time...";
+
+            tokenTest = TextTokenFromRawString(inputString, out textDelay);
+
+            if (tokenTest != null)
+            {
+                DaggerfallUI.AddHUDText(tokenTest, textDelay);
+
+                /*DaggerfallMessageBox textBox = new DaggerfallMessageBox(DaggerfallUI.UIManager, DaggerfallUI.UIManager.TopWindow);
+                textBox.SetTextTokens(tokenTest);
+                textBox.ClickAnywhereToClose = true;
+                textBox.Show();*/
+            }
+
+            return;
+            // Testing Stuff Ends Here
 
             if (playerEnterExit.IsPlayerInside)
             {
                 if (playerEnterExit.IsPlayerInsideOpenShop && BuildingOpenCheck(buildingType, buildingData) && (currentTimeSeconds - LastSeenShopText) > 86400 * (uint)ShopTextCooldown) // Complete, just needs vampire variants later.
                 {
+                    LastSeenShopText = currentTimeSeconds;
+
                     switch (playerGPS.ClimateSettings.ClimateType)
                     {
                         case DFLocation.ClimateBaseType.Desert:
@@ -251,6 +342,8 @@ namespace ArenaStyleFlavorText
                 }
                 else if (playerEnterExit.IsPlayerInsideTavern && (currentTimeSeconds - LastSeenTavernText) > 86400 * (uint)TavernTextCooldown)
                 {
+                    LastSeenTavernText = currentTimeSeconds;
+
                     switch (playerGPS.ClimateSettings.ClimateType)
                     {
                         case DFLocation.ClimateBaseType.Desert:
@@ -390,6 +483,8 @@ namespace ArenaStyleFlavorText
                 }
                 else if (playerEnterExit.BuildingDiscoveryData.buildingType == DFLocation.BuildingTypes.Temple && (currentTimeSeconds - LastSeenTempleText) > 86400 * (uint)TempleTextCooldown)
                 {
+                    LastSeenTempleText = currentTimeSeconds;
+
                     switch (playerGPS.ClimateSettings.ClimateType)
                     {
                         case DFLocation.ClimateBaseType.Desert:
@@ -529,6 +624,8 @@ namespace ArenaStyleFlavorText
                 }
                 else if (playerEnterExit.BuildingDiscoveryData.buildingType == DFLocation.BuildingTypes.GuildHall && playerEnterExit.BuildingDiscoveryData.factionID == (int)FactionFile.FactionIDs.The_Mages_Guild && BuildingOpenCheck(buildingType, buildingData) && (currentTimeSeconds - LastSeenMagesGuildText) > 86400 * (uint)MagesGuildTextCooldown)
                 {
+                    LastSeenMagesGuildText = currentTimeSeconds;
+
                     switch (playerGPS.ClimateSettings.ClimateType)
                     {
                         case DFLocation.ClimateBaseType.Desert:
@@ -712,6 +809,8 @@ namespace ArenaStyleFlavorText
                 }
                 else if (playerEnterExit.BuildingDiscoveryData.buildingType == DFLocation.BuildingTypes.Palace && BuildingOpenCheck(buildingType, buildingData) && (currentTimeSeconds - LastSeenPalaceText) > 86400 * (uint)PalaceTextCooldown)
                 {
+                    LastSeenPalaceText = currentTimeSeconds;
+
                     switch (playerGPS.ClimateSettings.ClimateType)
                     {
                         case DFLocation.ClimateBaseType.Desert:
@@ -867,6 +966,8 @@ namespace ArenaStyleFlavorText
             {
                 if (playerGPS.CurrentRegionIndex == 17 && locationData.Name == "Daggerfall" && (currentTimeSeconds - LastSeenCastleDFText) > 86400 * (uint)CastleDFTextCooldown) // Daggerfall Region
                 {
+                    LastSeenCastleDFText = currentTimeSeconds;
+
                     switch (currentSeason)
                     {
                         case DaggerfallDateTime.Seasons.Fall:
@@ -916,6 +1017,8 @@ namespace ArenaStyleFlavorText
                 }
                 else if (playerGPS.CurrentRegionIndex == 20 && locationData.Name == "Sentinel" && (currentTimeSeconds - LastSeenCastleSentText) > 86400 * (uint)CastleSentTextCooldown) // Sentinel Region
                 {
+                    LastSeenCastleSentText = currentTimeSeconds;
+
                     switch (currentSeason)
                     {
                         case DaggerfallDateTime.Seasons.Fall:
@@ -966,6 +1069,8 @@ namespace ArenaStyleFlavorText
                 }
                 else if (playerGPS.CurrentRegionIndex == 23 && locationData.Name == "Wayrest" && (currentTimeSeconds - LastSeenCastleWayText) > 86400 * (uint)CastleWayTextCooldown) // Wayrest Region
                 {
+                    LastSeenCastleWayText = currentTimeSeconds;
+
                     switch (currentSeason)
                     {
                         case DaggerfallDateTime.Seasons.Fall:
