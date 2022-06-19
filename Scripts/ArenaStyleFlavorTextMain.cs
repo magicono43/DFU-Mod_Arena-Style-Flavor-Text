@@ -58,6 +58,8 @@ namespace ArenaStyleFlavorText
         public static ulong LastSeenCastleSentText { get; set; }
         public static ulong LastSeenCastleWayText { get; set; }
 
+        public static float TextDelay { get; set; }
+
         PlayerEnterExit playerEnterExit = GameManager.Instance.PlayerEnterExit;
         PlayerGPS playerGPS = GameManager.Instance.PlayerGPS;
         DaggerfallDateTime.Seasons currentSeason = DaggerfallUnity.Instance.WorldTime.Now.SeasonValue;
@@ -127,7 +129,7 @@ namespace ArenaStyleFlavorText
             LastSeenCastleWayText = 0;
         }
 
-        public static TextFile.Token[] TextTokenFromRawString(string rawString, out float textDelay)
+        public static TextFile.Token[] TextTokenFromRawString(string rawString)
         {
             var listOfCompLines = new List<string>();
             int partLength = 115;
@@ -135,7 +137,7 @@ namespace ArenaStyleFlavorText
                 partLength = 65;
             string sentence = rawString;
             string[] words = sentence.Split(' ');
-            textDelay = 5f + (words.Length * 0.25f);
+            TextDelay = 5f + (words.Length * 0.25f);
             var parts = new Dictionary<int, string>();
             string part = string.Empty;
             int partCounter = 0;
@@ -178,15 +180,14 @@ namespace ArenaStyleFlavorText
 
             // Just going to have some testing stuff for trying to mess with text-string and stuff here, completely temporary stuff.
             TextFile.Token[] tokenTest = null;
-            float textDelay = 5f;
 
             string inputString = "You enter the audience chamber of " + CityName() + "'s lord. Despite the season, not a ray of sunshine has touched this room. You breath in the musty air and wipe the sweat from your brow as you wait for the lord to finish business with some messengers from " + RemoteTown() + ". The behavior between the lord and the messengers is peculiar, considering the two have been at peace for some time...";
 
-            tokenTest = TextTokenFromRawString(inputString, out textDelay);
+            tokenTest = TextTokenFromRawString(inputString);
 
             if (tokenTest != null)
             {
-                DaggerfallUI.AddHUDText(tokenTest, textDelay);
+                DaggerfallUI.AddHUDText(tokenTest, TextDelay);
 
                 /*DaggerfallMessageBox textBox = new DaggerfallMessageBox(DaggerfallUI.UIManager, DaggerfallUI.UIManager.TopWindow);
                 textBox.SetTextTokens(tokenTest);
