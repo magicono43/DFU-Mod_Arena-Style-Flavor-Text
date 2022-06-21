@@ -182,10 +182,7 @@ namespace ArenaStyleFlavorText
             return false;
         }
 
-        // Might consider adding some randomness to the drinks mentioned in the text.
-        // start work on the alcohol and extra stuff tomorrow, too late and too tired right now.
-
-        public static string RandomAlcohol()
+        public static string RandomAlcohol() // Might want to add more "fantasy" sounding drinks to this at some point, but for now it should be alright hopefully.
         {
             DFLocation.ClimateBaseType climate = GameManager.Instance.PlayerGPS.ClimateSettings.ClimateType;
             DaggerfallDateTime.Seasons season = DaggerfallUnity.Instance.WorldTime.Now.SeasonValue;
@@ -211,37 +208,51 @@ namespace ArenaStyleFlavorText
                     switch (season)
                     {
                         case DaggerfallDateTime.Seasons.Fall:
+                            return variant == 0 ? "Mulled cider" : "Cinnamon mead";
                         case DaggerfallDateTime.Seasons.Spring:
                         default:
+                            return variant == 0 ? "Elderberry cocktail" : "Juniper berry mead";
                         case DaggerfallDateTime.Seasons.Summer:
+                            return variant == 0 ? "Barley wine" : "Golden ale";
                         case DaggerfallDateTime.Seasons.Winter:
+                            return variant == 0 ? "Mulled wine" : "Wassail";
                     }
                 case DFLocation.ClimateBaseType.Temperate:
                 default:
                     switch (season)
                     {
                         case DaggerfallDateTime.Seasons.Fall:
+                            return variant == 0 ? "Cranberry wine" : "Pumpkin sangria";
                         case DaggerfallDateTime.Seasons.Spring:
                         default:
+                            return variant == 0 ? "Watermelon Mojito" : "Tequila sunrise";
                         case DaggerfallDateTime.Seasons.Summer:
+                            return variant == 0 ? "Mint julep" : "Elderflower champagne";
                         case DaggerfallDateTime.Seasons.Winter:
+                            return variant == 0 ? "Mulled wine" : "Anise Liqueur";
                     }
                 case DFLocation.ClimateBaseType.Swamp:
                     switch (season)
                     {
                         case DaggerfallDateTime.Seasons.Fall:
-                            return variant == 0 ? "" : "";
+                            return variant == 0 ? "Banana liqueur" : "Grapefruit mimosa";
                         case DaggerfallDateTime.Seasons.Spring:
                         default:
-                            return variant == 0 ? "Sake sour" : "";
+                            return variant == 0 ? "Sake sour" : "Grapefruit daiquiri";
                         case DaggerfallDateTime.Seasons.Summer:
-                            return variant == 0 ? "" : "Sake mojito"; // continue here tomorrow.
+                            return variant == 0 ? "Pineapple sangria" : "Sake mojito";
                         case DaggerfallDateTime.Seasons.Winter:
-                            return variant == 0 ? "" : "";
+                            return variant == 0 ? "Snakebite cocktail" : "Coconut rum";
                     }
             }
         }
 
+        // shops, 6 vampire variants
+        // taverns, 10 vampire variants
+        // temples, 9 vampire variants
+        // mages, 0 vampire variants
+        // palaces, 2 vampire variants
+        // major castles, 1 vampire variant each.
 
 
         #region Shop Text
@@ -288,8 +299,13 @@ namespace ArenaStyleFlavorText
 
             if (weatherID == 1) // Cloudy
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
-                    raw = "You enter " + BuildName() + ", hoping that the sun will show itself again. There are many items of interest displayed on the shelves around the shopkeeper...";
+                if (variant == 0) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You enter " + BuildName() + ", silently thanking the dense clouds for shielding you from the dreaded sun today. You notice several items of interest on display...";
+                    else
+                        raw = "You enter " + BuildName() + ", hoping that the sun will show itself again. There are many items of interest displayed on the shelves around the shopkeeper...";
+                }
                 else if (variant == 1)
                     raw = "There is a window open in " + BuildName() + ": the shopkeeper is apparently hoping for some fresh scents of spring to brighten a gray day. Several wares and supplies on display might be helpful to you...";
                 else
@@ -358,8 +374,13 @@ namespace ArenaStyleFlavorText
 
             if (weatherID == 1) // Cloudy
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
-                    raw = "You enter " + BuildName() + ", hoping that the sun will show itself again. There are many items of interest displayed on the shelves around the shopkeeper...";
+                if (variant == 0) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You enter " + BuildName() + ", silently thanking the dense clouds for shielding you from the dreaded sun today. You notice several items of interest on display...";
+                    else
+                        raw = "You enter " + BuildName() + ", hoping that the sun will show itself again. There are many items of interest displayed on the shelves around the shopkeeper...";
+                }
                 else if (variant == 1)
                     raw = "The pleasant weather has given " + BuildName() + " an air of joviality. You browse through cases and and displays of various supplies...";
                 else
@@ -389,8 +410,13 @@ namespace ArenaStyleFlavorText
                     raw = "You enter " + BuildName() + ", happy to be out of the chilly and bright day. Many items of interest are displayed on the shelves in the main room...";
                 else if (variant == 1)
                     raw = BuildName() + " is as bright as the day outside and much warmer. Several wares and equipment look interesting to you...";
-                else // Add Vampire/Damage From Sun Variant
-                    raw = "You walk into " + BuildName() + ". At least it is sunny outside. Many new wares and supplies impress you enough for a closer look...";
+                else // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = ""; // Continue here after shower or sleep.
+                    else
+                        raw = "You walk into " + BuildName() + ". At least it is sunny outside. Many new wares and supplies impress you enough for a closer look...";
+                }
             }
             return TextTokenFromRawString(raw);
         }
@@ -437,8 +463,13 @@ namespace ArenaStyleFlavorText
 
             if (weatherID == 1) // Cloudy
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
-                    raw = "You enter " + BuildName() + ", hoping that the sun will show itself again. There are many items of interest displayed on the shelves around the shopkeeper...";
+                if (variant == 0) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You enter " + BuildName() + ", silently thanking the dense clouds for shielding you from the dreaded sun today. You notice several items of interest on display...";
+                    else
+                        raw = "You enter " + BuildName() + ", hoping that the sun will show itself again. There are many items of interest displayed on the shelves around the shopkeeper...";
+                }
                 else if (variant == 1)
                     raw = "There is a window open in " + BuildName() + ": the shopkeeper is apparently hoping for some fresh scents of spring air to brighten a gray day. Several wares and supplies on display might be helpful to you...";
                 else
@@ -689,7 +720,7 @@ namespace ArenaStyleFlavorText
                 if (variant == 0)
                     raw = "You enter " + BuildName() + ", rubbing the chill night air from your bones. The tavern is full of people bustling here and there...";
                 else if (variant == 1)
-                    raw = "On this cold autumn night, " + BuildName() + " seems especially inviting. You smell apples baking in the kitchen and look forward to your first draught of ale...";
+                    raw = "On this cold autumn night, " + BuildName() + " seems especially inviting. You smell apples baking in the kitchen and look forward to your first serving of " + RandomAlcohol() + "...";
                 else
                     raw = "The warm smells of tobacco smoke and simple foods draw you into " + BuildName() + " from the cold autumn night...";
             }
@@ -805,7 +836,7 @@ namespace ArenaStyleFlavorText
             else // Sunny or anything else
             {
                 if (variant == 0)
-                    raw = "Cool shade and cooler drinks greet you as you make your way out of the heat and into " + BuildName() + ", smiling at the serving wench who holds a mug of ale ready for the first thirsty patron...";
+                    raw = "Cool shade and cooler drinks greet you as you make your way out of the heat and into " + BuildName() + ", smiling at the serving wench who holds a glass of " + RandomAlcohol() + " ready for the first thirsty patron...";
                 else if (variant == 1)
                     raw = "It is a relief to move inside " + BuildName() + ", away from the burning summer heat, and you feel that a cold mug of grog might be in order...";
                 else
@@ -836,7 +867,7 @@ namespace ArenaStyleFlavorText
                 else if (variant == 1)
                     raw = "You enter " + BuildName() + " to the smell of fresh baked bread and the sound of the patrons laughing with the serving wench...";
                 else
-                    raw = "The serving wench is passing other patrons mugs of cold ale as you enter " + BuildName() + " from the cloudy day...";
+                    raw = "The serving wench is passing other patrons glasses of cold " + RandomAlcohol() + " as you enter " + BuildName() + " from the cloudy day...";
             }
             else if (weatherID == 2) // Rainy
             {
@@ -850,11 +881,11 @@ namespace ArenaStyleFlavorText
             else if (weatherID == 3) // Snowy
             {
                 if (variant == 0)
-                    raw = "You close the door on the snow and rub your hands together, warming them. Ahead of you the innkeeper of " + BuildName() + " hails you welcome, holding a steaming mug of mulled wine...";
+                    raw = "You close the door on the snow and rub your hands together, warming them. Ahead of you the innkeeper of " + BuildName() + " hails you welcome, holding a glass of " + RandomAlcohol() + "...";
                 else if (variant == 1)
                     raw = "Great billows of wind and snow follow you into " + BuildName() + " like a white shadow. The floor is wet with the footprints of the patrons...";
                 else
-                    raw = "Mulled wine is the featured drink today in " + BuildName() + ". You shake the snow from your shoulders and head, and think that nothing could sound better...";
+                    raw = RandomAlcohol() + " is the featured drink today in " + BuildName() + ". You shake the snow from your shoulders and head, and think that nothing could sound better...";
             }
             else // Sunny or anything else
             {
@@ -878,7 +909,7 @@ namespace ArenaStyleFlavorText
                 if (variant == 0)
                     raw = "You enter " + BuildName() + ", rubbing the cold night air from your bones. The tavern is full of people bustling here and there...";
                 else if (variant == 1)
-                    raw = "On this cold autumn night, " + BuildName() + " seems especially inviting. You smell apples baking in the kitchen and look forward to your first draught of ale...";
+                    raw = "On this cold autumn night, " + BuildName() + " seems especially inviting. You smell apples baking in the kitchen and look forward to your first serving of " + RandomAlcohol() + "...";
                 else
                     raw = "The warm smells of tobacco smoke and simple foods draw you into " + BuildName() + " from the cold autumn night...";
             }
@@ -994,7 +1025,7 @@ namespace ArenaStyleFlavorText
             else // Sunny or anything else
             {
                 if (variant == 0)
-                    raw = "Warm shade and warmer drinks greet you as you make your way out of the chill and into " + BuildName() + ", smiling at the serving wench who holds a mug of ale ready for the first thirsty patron...";
+                    raw = "Warm shade and warmer drinks greet you as you make your way out of the chill and into " + BuildName() + ", smiling at the serving wench who holds a glass of " + RandomAlcohol() + " ready for the first thirsty patron...";
                 else if (variant == 1)
                     raw = "It is a relief to move inside " + BuildName() + ", away from the chilling summer air, and you feel that a cold mug of grog might be in order...";
                 else
@@ -1025,23 +1056,23 @@ namespace ArenaStyleFlavorText
                 else if (variant == 1)
                     raw = "You enter " + BuildName() + " and your frozen senses revive to the smell of fresh baked bread and the sound of the patrons laughing with the serving wench...";
                 else
-                    raw = "The serving wench is passing other patrons mugs of hot mulled wine as you enter " + BuildName() + " from the cold, cloudy day...";
+                    raw = "The serving wench is passing other patrons glasses of " + RandomAlcohol() + " as you enter " + BuildName() + " from the cold, cloudy day...";
             }
             else if (weatherID == 3) // Snowy
             {
                 if (variant == 0)
-                    raw = "You close the door on the snow and rub your hands together, warming them. Ahead of you the innkeeper of " + BuildName() + " hails you welcome, holding a steaming mug of mulled wine...";
+                    raw = "You close the door on the snow and rub your hands together, warming them. Ahead of you the innkeeper of " + BuildName() + " hails you welcome, holding a glass of " + RandomAlcohol() + "...";
                 else if (variant == 1)
                     raw = "Great billows of wind and snow follow you into " + BuildName() + " like a white shadow. The floor is wet with the footprints of the patrons...";
                 else
-                    raw = "Mulled wine is the featured drink today in " + BuildName() + ". You shake the snow from your shoulders and head, and think that nothing could sound better...";
+                    raw = RandomAlcohol() + " is the featured drink today in " + BuildName() + ". You shake the snow from your shoulders and head, and think that nothing could sound better...";
             }
             else // Sunny or anything else
             {
                 if (variant == 0)
                     raw = "You enter " + BuildName() + ", feeling the hearth fire slowly chasing away the chill that has crept into your bones from this winter's day...";
                 else if (variant == 1)
-                    raw = "It is a freezing day for winter, and the red-cheeked townspeople in " + BuildName() + " drink their mulled wine to a toast for a long hibernation...";
+                    raw = "It is a freezing day for winter, and the red-cheeked townspeople in " + BuildName() + " drink their " + RandomAlcohol() + " to a toast for a long hibernation...";
                 else // Add Vampire/Damage From Sun Variant
                     raw = "The winter sunlight shining through " + BuildName() + " windows helps little compared to the roaring fireplace to warm your chilled body...";
             }
@@ -1058,7 +1089,7 @@ namespace ArenaStyleFlavorText
                 if (variant == 0)
                     raw = "You enter " + BuildName() + ", rubbing the chill night air from your bones. The tavern is full of people bustling here and there...";
                 else if (variant == 1)
-                    raw = "On this cool autumn night, " + BuildName() + " seems especially inviting. You smell apples baking in the kitchen and look forward to your first draught of ale...";
+                    raw = "On this cool autumn night, " + BuildName() + " seems especially inviting. You smell apples baking in the kitchen and look forward to your first serving of " + RandomAlcohol() + "...";
                 else
                     raw = "The warm smells of tobacco smoke and simple foods draw you into " + BuildName() + " from the cold autumn night...";
             }
@@ -1174,7 +1205,7 @@ namespace ArenaStyleFlavorText
             else // Sunny or anything else
             {
                 if (variant == 0)
-                    raw = "Cool shade and cooler drinks greet you as you make your way out of the heat and into " + BuildName() + ", smiling at the serving wench who holds a mug of ale ready for the first thirsty patron...";
+                    raw = "Cool shade and cooler drinks greet you as you make your way out of the heat and into " + BuildName() + ", smiling at the serving wench who holds a glass of " + RandomAlcohol() + " ready for the first thirsty patron...";
                 else if (variant == 1)
                     raw = "It is a relief to move inside " + BuildName() + ", away from the burning summer heat, and you feel that a cold mug of grog might be in order...";
                 else
@@ -1205,23 +1236,23 @@ namespace ArenaStyleFlavorText
                 else if (variant == 1)
                     raw = "You enter " + BuildName() + " and your frozen senses revive to the smell of fresh baked bread and the sound of the patrons laughing with the serving wench...";
                 else
-                    raw = "The serving wench is passing other patrons mugs of hot mulled wine as you enter " + BuildName() + " from the cold, cloudy day...";
+                    raw = "The serving wench is passing other patrons glasses of " + RandomAlcohol() + " as you enter " + BuildName() + " from the cold, cloudy day...";
             }
             else if (weatherID == 3) // Snowy
             {
                 if (variant == 0)
-                    raw = "You close the door on the snow and rub your hands together, warming them. Ahead of you the innkeeper of " + BuildName() + " hails you welcome, holding a steaming mug of mulled wine...";
+                    raw = "You close the door on the snow and rub your hands together, warming them. Ahead of you the innkeeper of " + BuildName() + " hails you welcome, holding a glass of " + RandomAlcohol() + "...";
                 else if (variant == 1)
                     raw = "Great billows of wind and snow follow you into " + BuildName() + " like a white shadow. The floor is wet with the footprints of the patrons...";
                 else
-                    raw = "Mulled wine is the featured drink today in " + BuildName() + ". You shake the snow from your shoulders and head, and think that nothing could sound better...";
+                    raw = RandomAlcohol() + " is the featured drink today in " + BuildName() + ". You shake the snow from your shoulders and head, and think that nothing could sound better...";
             }
             else // Sunny or anything else
             {
                 if (variant == 0)
                     raw = "You enter " + BuildName() + ", feeling the hearth fire slowly chasing away the chill that has crept into your bones from this winter's day...";
                 else if (variant == 1)
-                    raw = "It is a pleasant day for winter, and the red-cheeked townspeople in " + BuildName() + " drink their mulled wine to a toast for a long hibernation...";
+                    raw = "It is a pleasant day for winter, and the red-cheeked townspeople in " + BuildName() + " drink their " + RandomAlcohol() + " to a toast for a long hibernation...";
                 else // Add Vampire/Damage From Sun Variant
                     raw = "The winter sunlight shining through " + BuildName() + " windows does as much as the roaring fireplace to warm your chilled body...";
             }
