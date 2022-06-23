@@ -247,13 +247,6 @@ namespace ArenaStyleFlavorText
             }
         }
 
-        // shops, 6 vampire variants
-        // taverns, 10 vampire variants
-        // temples, 9 vampire variants
-        // mages, 0 vampire variants
-        // palaces, 2 vampire variants
-        // major castles, 1 vampire variant each.
-
 
         #region Shop Text
 
@@ -413,7 +406,7 @@ namespace ArenaStyleFlavorText
                 else // Add Vampire/Damage From Sun Variant (Done)
                 {
                     if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
-                        raw = ""; // Continue here after shower or sleep.
+                        raw = "You walk into " + BuildName() + ". A short refuge from the agonizing sun this dreadfully clear day. You absentmindedly rub the fresh blisters on your skin, as you browse the various items on the store shelves.";
                     else
                         raw = "You walk into " + BuildName() + ". At least it is sunny outside. Many new wares and supplies impress you enough for a closer look...";
                 }
@@ -560,8 +553,13 @@ namespace ArenaStyleFlavorText
                     raw = "You enter " + BuildName() + ", happy to be out of the cold and bright winter's day. Many items of interest are displayed on the shelves in the main room...";
                 else if (variant == 1)
                     raw = BuildName() + " is as bright as the winter day outside and much colder. Several wares and equipment look interesting to you...";
-                else // Add Vampire/Damage From Sun Variant
-                    raw = "You walk into " + BuildName() + ", rubbing your numb hands together. At least it is sunny outside. Many new wares and supplies impress you enough for a closer look...";
+                else // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You walk into " + BuildName() + ". A short refuge from the agonizing sun this dreadfully clear day. You absentmindedly rub the fresh blisters on your skin, as you browse the various items on the store shelves.";
+                    else
+                        raw = "You walk into " + BuildName() + ", rubbing your numb hands together. At least it is sunny outside. Many new wares and supplies impress you enough for a closer look...";
+                }
             }
             return TextTokenFromRawString(raw);
         }
@@ -700,8 +698,13 @@ namespace ArenaStyleFlavorText
                     raw = "You enter " + BuildName() + ", happy to be out of the cold and bright winter's day. Many items of interest are displayed on the shelves in the main room...";
                 else if (variant == 1)
                     raw = BuildName() + " is as bright as the winter day outside and much warmer. Several wares and equipment look interesting to you...";
-                else // Add Vampire/Damage From Sun Variant
-                    raw = "You walk into " + BuildName() + ", rubbing your numb hands together. At least it is sunny outside. Many new wares and supplies impress you enough for a closer look...";
+                else // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You walk into " + BuildName() + ". A short refuge from the agonizing sun this dreadfully clear day. You absentmindedly rub the fresh blisters on your skin, as you browse the various items on the store shelves.";
+                    else
+                        raw = "You walk into " + BuildName() + ", rubbing your numb hands together. At least it is sunny outside. Many new wares and supplies impress you enough for a closer look...";
+                }
             }
             return TextTokenFromRawString(raw);
         }
@@ -745,8 +748,13 @@ namespace ArenaStyleFlavorText
             }
             else // Sunny or anything else
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
-                    raw = "You enter " + BuildName() + ", heartened by the smells of food and spices, and prepare to relax in the warm sunlight...";
+                if (variant == 0) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You enter " + BuildName() + ", heartened by the smells of food and spices, and prepare to relax in a nice dark corner away from the cruel sun...";
+                    else
+                        raw = "You enter " + BuildName() + ", heartened by the smells of food and spices, and prepare to relax in the warm sunlight...";
+                }
                 else if (variant == 1)
                     raw = "The fiery autumn sun disappears as you enter " + BuildName() + ". The sounds of laughter, clinking glasses, and banging cooking pans meet your ears...";
                 else
@@ -794,8 +802,13 @@ namespace ArenaStyleFlavorText
                     raw = "A cool breeze follows you into " + BuildName() + ", bringing with it the smell of newly bloomed flowers and fresh air...";
                 else if (variant == 1)
                     raw = "Through the open door and windows, all the smells of spring come into " + BuildName() + " and the chill of the winter months fly out...";
-                else // Add Vampire/Damage From Sun Variant
-                    raw = "You walk into " + BuildName() + ", immediately wishing you were again out in the pleasant spring day...";
+                else // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You walk into " + BuildName() + ", thankful to have at least a moment of reprieve from the horribly sunny spring day...";
+                    else
+                        raw = "You walk into " + BuildName() + ", immediately wishing you were again out in the pleasant spring day...";
+                }
             }
             return TextTokenFromRawString(raw);
         }
@@ -893,8 +906,13 @@ namespace ArenaStyleFlavorText
                     raw = "You enter " + BuildName() + ", feeling rather comfortable on this cool day...";
                 else if (variant == 1)
                     raw = "It is a comfortably cool day, and the townspeople in " + BuildName() + " drink their wine to a toast for such a pleasant day...";
-                else // Add Vampire/Damage From Sun Variant
-                    raw = "The sunlight shining through " + BuildName() + " windows does as much as the roaring fireplace to warm your slightly chilled body...";
+                else // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "The harsh sunlight shining through " + BuildName() + "'s windows makes you question if it was even worth coming here in the first place...";
+                    else
+                        raw = "The sunlight shining through " + BuildName() + "'s windows does as much as the roaring fireplace to warm your slightly chilled body...";
+                }
             }
             return TextTokenFromRawString(raw);
         }
@@ -934,8 +952,13 @@ namespace ArenaStyleFlavorText
             }
             else // Sunny or anything else
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
-                    raw = "You enter " + BuildName() + ", heartened by the smells of food and spices, and prepare to relax in the warm sunlight...";
+                if (variant == 0) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You enter " + BuildName() + ", heartened by the smells of food and spices, and prepare to relax in a nice dark corner away from the cruel sun...";
+                    else
+                        raw = "You enter " + BuildName() + ", heartened by the smells of food and spices, and prepare to relax in the warm sunlight...";
+                }
                 else if (variant == 1)
                     raw = "The fiery autumn sun disappears as you enter " + BuildName() + ". The sounds of laughter, clinking glasses, and banging cooking pans meet your ears...";
                 else
@@ -983,8 +1006,13 @@ namespace ArenaStyleFlavorText
                     raw = "The chill breath of spring follows you into " + BuildName() + ", bringing with it the smell of bloomed flowers and ice fresh air...";
                 else if (variant == 1)
                     raw = "Through the open door and windows, all the smells of spring come into " + BuildName() + " and the freeze of the winter months fly out...";
-                else // Add Vampire/Damage From Sun Variant
-                    raw = "You walk into " + BuildName() + ", immediately wishing you were again out in the cool spring day...";
+                else // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You walk into " + BuildName() + ", thankful to have at least a moment of reprieve from the horribly sunny spring day...";
+                    else
+                        raw = "You walk into " + BuildName() + ", immediately wishing you were again out in the cool spring day...";
+                }
             }
             return TextTokenFromRawString(raw);
         }
@@ -1006,8 +1034,13 @@ namespace ArenaStyleFlavorText
 
             if (weatherID == 1) // Cloudy
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
-                    raw = "Although the sun isn't shining, the chill has frozen your clothes to your back like a second skin. As you close the door to " + BuildName() + " your eyes search for a warm dark corner in which to rest...";
+                if (variant == 0) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism())
+                        raw = "While you are relieved the clouds shield you from the sun today, the air devoid of any warmth on this cold day has allowed your clothes to freeze to your clammy, unliving skin. As you close the door to " + BuildName() + " your eyes search for a warm dark corner in which to thaw out...";
+                    else
+                        raw = "Although the sun isn't shining, the chill has frozen your clothes to your back like a second skin. As you close the door to " + BuildName() + " your eyes search for a warm dark corner in which to rest...";
+                }
                 else if (variant == 1)
                     raw = "It is uncomfortably cold and dry in " + BuildName() + ", almost as bad as the chilly summer day outside...";
                 else
@@ -1073,8 +1106,13 @@ namespace ArenaStyleFlavorText
                     raw = "You enter " + BuildName() + ", feeling the hearth fire slowly chasing away the chill that has crept into your bones from this winter's day...";
                 else if (variant == 1)
                     raw = "It is a freezing day for winter, and the red-cheeked townspeople in " + BuildName() + " drink their " + RandomAlcohol() + " to a toast for a long hibernation...";
-                else // Add Vampire/Damage From Sun Variant
-                    raw = "The winter sunlight shining through " + BuildName() + " windows helps little compared to the roaring fireplace to warm your chilled body...";
+                else // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "The harsh sunlight shining through " + BuildName() + "'s windows makes you question if it was even worth coming here in the first place...";
+                    else
+                        raw = "The winter sunlight shining through " + BuildName() + "'s windows helps little compared to the roaring fireplace to warm your chilled body...";
+                }
             }
             return TextTokenFromRawString(raw);
         }
@@ -1114,8 +1152,13 @@ namespace ArenaStyleFlavorText
             }
             else // Sunny or anything else
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
-                    raw = "You enter " + BuildName() + ", heartened by the smells of food and spices, and prepare to relax in the warm sunlight...";
+                if (variant == 0) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You enter " + BuildName() + ", heartened by the smells of food and spices, and prepare to relax in a nice dark corner away from the cruel sun...";
+                    else
+                        raw = "You enter " + BuildName() + ", heartened by the smells of food and spices, and prepare to relax in the warm sunlight...";
+                }
                 else if (variant == 1)
                     raw = "The fiery autumn sun disappears as you enter " + BuildName() + ". The sounds of laughter, clinking glasses, and banging cooking pans meet your ears...";
                 else
@@ -1163,8 +1206,13 @@ namespace ArenaStyleFlavorText
                     raw = "A cool breeze follows you into " + BuildName() + ", bringing with it the smell of newly bloomed flowers and fresh cut grass...";
                 else if (variant == 1)
                     raw = "Through the open door and windows, all the smells of spring come into " + BuildName() + " and the stuffiness of the winter months fly out...";
-                else // Add Vampire/Damage From Sun Variant
-                    raw = "You walk into " + BuildName() + ", immediately wishing you were again out in the sunny spring day...";
+                else // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You walk into " + BuildName() + ", thankful to have at least a moment of reprieve from the horribly sunny spring day...";
+                    else
+                        raw = "You walk into " + BuildName() + ", immediately wishing you were again out in the sunny spring day...";
+                }
             }
             return TextTokenFromRawString(raw);
         }
@@ -1253,8 +1301,13 @@ namespace ArenaStyleFlavorText
                     raw = "You enter " + BuildName() + ", feeling the hearth fire slowly chasing away the chill that has crept into your bones from this winter's day...";
                 else if (variant == 1)
                     raw = "It is a pleasant day for winter, and the red-cheeked townspeople in " + BuildName() + " drink their " + RandomAlcohol() + " to a toast for a long hibernation...";
-                else // Add Vampire/Damage From Sun Variant
-                    raw = "The winter sunlight shining through " + BuildName() + " windows does as much as the roaring fireplace to warm your chilled body...";
+                else // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "The harsh sunlight shining through " + BuildName() + "'s windows makes you question if it was even worth coming here in the first place...";
+                    else
+                        raw = "The winter sunlight shining through " + BuildName() + "'s windows does as much as the roaring fireplace to warm your chilled body...";
+                }
             }
             return TextTokenFromRawString(raw);
         }
@@ -1305,10 +1358,20 @@ namespace ArenaStyleFlavorText
 
             if (weatherID == 1) // Cloudy
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
-                    raw = "You enter " + BuildName() + " wishing that the sun would return and make the day a truly pleasant one. You can hear chanting in the distance...";
-                else if (variant == 1) // Add Vampire/Damage From Sun Variant
-                    raw = "You walk into " + BuildName() + ", smelling the sweet incense that rises like a cloud from the sanctuary floor. In the distance, you hear the clergy praying for a return of the sun to this dreary spring day...";
+                if (variant == 0) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You enter " + BuildName() + " thankful that today you are given mercy from the sun by the thick clouds covering the sky. You can hear chanting in the distance...";
+                    else
+                        raw = "You enter " + BuildName() + " wishing that the sun would return and make the day a truly pleasant one. You can hear chanting in the distance...";
+                }
+                else if (variant == 1) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You walk into " + BuildName() + ", smelling the sweet incense that rises like a cloud from the sanctuary floor. In the distance, you hear the clergy praying for a return of the sun to this dreary spring day. You silenty curse the priests and their wishes for that dreaded tormentor to return...";
+                    else
+                        raw = "You walk into " + BuildName() + ", smelling the sweet incense that rises like a cloud from the sanctuary floor. In the distance, you hear the clergy praying for a return of the sun to this dreary spring day...";
+                }
                 else
                     raw = "You enter " + BuildName() + ", gray as this spring day sky. Almost immediately the bittersweet smell of the incense strengthens your spirit. The clergy drone their prayers far off in the distance.";
             }
@@ -1353,8 +1416,13 @@ namespace ArenaStyleFlavorText
                     raw = "You enter " + BuildName() + ", shaking the rain off of yourself. You can hear chanting in the distance...";
                 else if (variant == 1)
                     raw = "You enter the hallowed ground of " + BuildName() + " sanctuary, the sounds of the summer rain shower mixing with that of the chanting clergy. All your tension, like the rare water, flows away.";
-                else // Add Vampire/Damage From Sun Variant
-                    raw = "A fine mist, escaped from the tempest outside, has flooded " + BuildName() + " sanctuary bringing all the smells of summer with it. You recognize the sing-song prayer of the clergy as a plea for a benevolent summer sun.";
+                else // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "A fine mist, escaped from the tempest outside, has flooded " + BuildName() + " sanctuary bringing all the smells of summer with it. You recognize the sing-song prayer of the clergy as a plea for a benevolent summer sun. Even though you prefer not being soaked by rain, you rather that than being cooked by that menace in the sky...";
+                    else
+                        raw = "A fine mist, escaped from the tempest outside, has flooded " + BuildName() + " sanctuary bringing all the smells of summer with it. You recognize the sing-song prayer of the clergy as a plea for a benevolent summer sun.";
+                }
             }
             else // Sunny or anything else
             {
@@ -1388,7 +1456,7 @@ namespace ArenaStyleFlavorText
                     raw = "You enter " + BuildName() + ", shaking the cold rain off of yourself. You can hear chanting in the distance...";
                 else if (variant == 1)
                     raw = "Trailing puddles of cold rain behind behind you, you enter " + BuildName() + " sanctuary.An open window lets the smell of the storm in, overpowering the sweet incense of " + BuildName() + " itself.";
-                else // Add Vampire/Damage From Sun Variant
+                else
                     raw = "Wiping the cold rain from your shoulders and head, you walk into " + BuildName() + " sanctuary. Off to the distance, you can hear the clergy, prayer in a sing-song for a good planting in spring for the farmers...";
             }
             else if (weatherID == 3) // Snowy
@@ -1397,7 +1465,7 @@ namespace ArenaStyleFlavorText
                     raw = "You enter " + BuildName() + ", shaking the snow off of yourself and stamping your feet to warm them. You can hear chanting in the distance...";
                 else if (variant == 1)
                     raw = "Brushing the cold off you walk into " + BuildName() + " sanctuary. The smell of incense strikes you immediately, spicy and somewhat sweet...";
-                else // Add Vampire/Damage From Sun Variant
+                else
                     raw = "You trail some cold into " + BuildName() + " sanctuary as you enter. The air is as cold as the outdoors, yet filled with the smell of incense and the sound of the clergy praying...";
             }
             else // Sunny or anything else
@@ -1454,10 +1522,20 @@ namespace ArenaStyleFlavorText
 
             if (weatherID == 1) // Cloudy
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
-                    raw = "You enter " + BuildName() + " wishing that the sun would return and make the day a truly pleasant one. You can hear chanting in the distance...";
-                else if (variant == 1) // Add Vampire/Damage From Sun Variant
-                    raw = "You walk into " + BuildName() + ", smelling the sweet incense that rises like a cloud from the sanctuary floor. In the distance, you hear the clergy praying for a return of the sun to this dreary and cold spring day...";
+                if (variant == 0) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You enter " + BuildName() + " thankful that today you are given mercy from the sun by the thick clouds covering the sky. You can hear chanting in the distance...";
+                    else
+                        raw = "You enter " + BuildName() + " wishing that the sun would return and make the day a truly pleasant one. You can hear chanting in the distance...";
+                }
+                else if (variant == 1) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You walk into " + BuildName() + ", smelling the sweet incense that rises like a cloud from the sanctuary floor. In the distance, you hear the clergy praying for a return of the sun to this dreary and cold spring day. You silenty curse the priests and their wishes for that dreaded tormentor to return...";
+                    else
+                        raw = "You walk into " + BuildName() + ", smelling the sweet incense that rises like a cloud from the sanctuary floor. In the distance, you hear the clergy praying for a return of the sun to this dreary and cold spring day...";
+                }
                 else
                     raw = "You enter " + BuildName() + ", gray as this spring day sky. Almost immediately the bittersweet smell of the incense strengthens your spirit. The clergy drone their prayers far off in the distance.";
             }
@@ -1594,10 +1672,20 @@ namespace ArenaStyleFlavorText
 
             if (weatherID == 1) // Cloudy
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
-                    raw = "You enter " + BuildName() + " wishing that the sun would return and make the day a truly pleasant one. You can hear chanting in the distance...";
-                else if (variant == 1) // Add Vampire/Damage From Sun Variant
-                    raw = "You walk into " + BuildName() + ", smelling the sweet incense that rises like a cloud from the sanctuary floor. In the distance, you hear the clergy praying for a return of the sun to this dreary spring day...";
+                if (variant == 0) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You enter " + BuildName() + " thankful that today you are given mercy from the sun by the thick clouds covering the sky. You can hear chanting in the distance...";
+                    else
+                        raw = "You enter " + BuildName() + " wishing that the sun would return and make the day a truly pleasant one. You can hear chanting in the distance...";
+                }
+                else if (variant == 1) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You walk into " + BuildName() + ", smelling the sweet incense that rises like a cloud from the sanctuary floor. In the distance, you hear the clergy praying for a return of the sun to this dreary spring day. You silenty curse the priests and their wishes for that dreaded tormentor to return...";
+                    else
+                        raw = "You walk into " + BuildName() + ", smelling the sweet incense that rises like a cloud from the sanctuary floor. In the distance, you hear the clergy praying for a return of the sun to this dreary spring day...";
+                }
                 else
                     raw = "You enter " + BuildName() + ", gray as this spring day sky. Almost immediately the bittersweet smell of the incense strengthens your spirit. The clergy drone their prayers far off in the distance.";
             }
@@ -2322,8 +2410,13 @@ namespace ArenaStyleFlavorText
 
             if (weatherID == 1) // Cloudy
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
-                    raw = "You walk into the lord's audience chamber, noticing the many fine trappings and expensive furniture that decorate the area. The day has been overcast, iron gray clouds that hint of a spring storm. You find yourself welcoming the sun's return. Ahead of you waits the lord of " + CityName() + ".";
+                if (variant == 0) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You walk into the lord's audience chamber, noticing the many fine trappings and expensive furniture that decorate the area. The day has been overcast, iron gray clouds that hint of a spring storm. You find yourself dreading the sun's inevitable return. Ahead of you waits the lord of " + CityName() + ".";
+                    else
+                        raw = "You walk into the lord's audience chamber, noticing the many fine trappings and expensive furniture that decorate the area. The day has been overcast, iron gray clouds that hint of a spring storm. You find yourself welcoming the sun's return. Ahead of you waits the lord of " + CityName() + ".";
+                }
                 else if (variant == 1)
                     raw = "The government of " + CityName() + " is like the weather outside, hot and unforgiving. In the audience chamber no one even whispers their theories about the ulterior motives behind the city's recent deal with its neighbor, " + RemoteTown() + ".";
                 else
@@ -2473,8 +2566,13 @@ namespace ArenaStyleFlavorText
 
             if (weatherID == 1) // Cloudy
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
-                    raw = "You walk into the lord's audience chamber, noticing the many fine trappings and expensive furniture that decorate the area. The day has been overcast, iron gray clouds that hint of a spring storm. You find yourself welcoming the sun's return. Ahead of you waits the lord of " + CityName() + ".";
+                if (variant == 0) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You walk into the lord's audience chamber, noticing the many fine trappings and expensive furniture that decorate the area. The day has been overcast, iron gray clouds that hint of a spring storm. You find yourself dreading the sun's inevitable return. Ahead of you waits the lord of " + CityName() + ".";
+                    else
+                        raw = "You walk into the lord's audience chamber, noticing the many fine trappings and expensive furniture that decorate the area. The day has been overcast, iron gray clouds that hint of a spring storm. You find yourself welcoming the sun's return. Ahead of you waits the lord of " + CityName() + ".";
+                }
                 else if (variant == 1)
                     raw = "The government of " + CityName() + " is like the weather outside, cold and unforgiving. In the audience chamber no one even whispers their theories about the ulterior motives behind the city's recent deal with its neighbor, " + RemoteTown() + ".";
                 else
@@ -2761,8 +2859,13 @@ namespace ArenaStyleFlavorText
 
             if (weatherID == 1) // Cloudy
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
-                    raw = "You walk into " + RegentName() + "'s audience chamber, noticing the many fine trappings and expensive furniture that decorate the area. The day has been overcast, iron gray clouds that hint of a spring storm. You find yourself welcoming the sun's return. Ahead of you waits the " + RegentTitle() + " of " + CityName() + ".";
+                if (variant == 0) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You walk into " + RegentName() + "'s audience chamber, noticing the many fine trappings and expensive furniture that decorate the area. The day has been overcast, iron gray clouds that hint of a spring storm. You find yourself dreading the sun's inevitable return. Ahead of you waits the " + RegentTitle() + " of " + CityName() + ".";
+                    else
+                        raw = "You walk into " + RegentName() + "'s audience chamber, noticing the many fine trappings and expensive furniture that decorate the area. The day has been overcast, iron gray clouds that hint of a spring storm. You find yourself welcoming the sun's return. Ahead of you waits the " + RegentTitle() + " of " + CityName() + ".";
+                }
                 else if (variant == 1)
                     raw = "The government of " + CityName() + " is like the weather outside, pleasantly temperate but dark with clouds threatening catastrophe. In " + RegentName() + "'s audience chamber no one even whispers their theories about the ulterior motives behind the region's recent deal with its neighbor, Shalgora.";
                 else
@@ -2977,7 +3080,7 @@ namespace ArenaStyleFlavorText
 
             if (weatherID == 1) // Cloudy
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
+                if (variant == 0)
                     raw = "You walk into the " + RegentTitle() + "'s audience chamber, noticing the many fine trappings and furniture that decorate the area. The chilling temperature and iron gray clouds outside have made everything dull, though you find that the interior of this chamber is brightly lit and cheerful. Somewhere within waits " + RegentTitle() + " of " + CityName() + "...";
                 else if (variant == 1)
                     raw = "Chilled by the cool air outside, you stumble into " + RegentName() + "'s audience chamber, only to feel a colder chill that pierces your soul. The room itself is physically warm and pleasing to the eye, but you sense an undercurrent of tension...";
@@ -3053,8 +3156,13 @@ namespace ArenaStyleFlavorText
 
             if (weatherID == 1) // Cloudy
             {
-                if (variant == 0) // Add Vampire/Damage From Sun Variant
-                    raw = "You walk into " + RegentName() + "'s audience chamber, noticing the many fine trappings and expensive furniture that decorate the area. The day has been overcast, iron gray clouds that hint of a spring storm. You find yourself welcoming the sun's return. Ahead of you waits the " + RegentTitle() + " of " + CityName() + ".";
+                if (variant == 0) // Add Vampire/Damage From Sun Variant (Done)
+                {
+                    if (GameManager.Instance.PlayerEffectManager.HasVampirism() || GameManager.Instance.PlayerEntity.Career.DamageFromSunlight)
+                        raw = "You walk into " + RegentName() + "'s audience chamber, noticing the many fine trappings and expensive furniture that decorate the area. The day has been overcast, iron gray clouds that hint of a spring storm. You find yourself dreading the sun's inevitable return. Ahead of you waits the " + RegentTitle() + " of " + CityName() + ".";
+                    else
+                        raw = "You walk into " + RegentName() + "'s audience chamber, noticing the many fine trappings and expensive furniture that decorate the area. The day has been overcast, iron gray clouds that hint of a spring storm. You find yourself welcoming the sun's return. Ahead of you waits the " + RegentTitle() + " of " + CityName() + ".";
+                }
                 else if (variant == 1)
                     raw = "The government of " + CityName() + " is like the weather outside, pleasantly temperate but dark with clouds threatening catastrophe. In " + RegentName() + "'s audience chamber no one even whispers their theories about the ulterior motives behind the region's recent deal with its neighbor, Gavaudon.";
                 else

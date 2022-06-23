@@ -175,7 +175,7 @@ namespace ArenaStyleFlavorText
             TextFile.Token[] tokens = null;
             // Add another settings that allows for non-HUD text to display and instead use the "pausing messagebox" like the quest pack originally did.
             // Also add setting for the text reading delay thing.
-            // Continue on this tomorrow, more testing then redoing raw text entries for this, and other features, etc. Start getting closer to this being ready to release.
+            // Continue on this tomorrow, make the new mod name and change file names and add the settings that are still missing then more testing. Start getting closer to this being ready to release.
 
 
             // Just going to have some testing stuff for trying to mess with text-string and stuff here, completely temporary stuff.
