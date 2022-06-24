@@ -1,11 +1,11 @@
 // Project:         ArenaStyleFlavorText mod for Daggerfall Unity (http://www.dfworkshop.net)
 // Copyright:       Copyright (C) 2022 Kirk.O
 // License:         MIT License (http://www.opensource.org/licenses/mit-license.php)
-// Author:          Kirk.O & Cliffworms 
+// Author:          Kirk.O
 // Created On: 	    5/26/2022, 12:10 AM
-// Last Edit:		6/7/2022, 7:00 PM
+// Last Edit:		6/23/2022, 10:50 PM
 // Version:			1.00
-// Special Thanks:  Cliffworms, Kab the Bird Ranger, Jehuty, Ralzar, and Interkarma
+// Special Thanks:  Ted Peterson, Cliffworms, Kab the Bird Ranger, Jehuty, Ralzar, Kokytos, Hazelnut, and Interkarma
 // Modifier:
 
 using System;
@@ -19,16 +19,13 @@ using DaggerfallWorkshop.Game.Weather;
 using DaggerfallWorkshop.Utility;
 using DaggerfallWorkshop.Game.Guilds;
 using DaggerfallWorkshop.Game.Utility.ModSupport.ModSettings;
-using DaggerfallWorkshop.Game.Utility;
-using DaggerfallWorkshop.Game.Serialization;
 using System.Collections.Generic;
-using System.Text;
 using DaggerfallWorkshop.Game.UserInterfaceWindows;
 
 namespace ArenaStyleFlavorText
 {
-    public partial class ArenaStyleFlavorTextMain : MonoBehaviour
-	{
+    public partial class ArenaStyleFlavorTextMain : MonoBehaviour, IHasModSaveData
+    {
         static ArenaStyleFlavorTextMain instance;
 
         public static ArenaStyleFlavorTextMain Instance
@@ -39,6 +36,9 @@ namespace ArenaStyleFlavorText
         static Mod mod;
 
         // Options
+        public static int TextDisplayType { get; set; }
+        public static int MinDisplayDuration { get; set; }
+        public static int MaxDisplayDuration { get; set; }
         public static int ShopTextCooldown { get; set; }
         public static int TavernTextCooldown { get; set; }
         public static int TempleTextCooldown { get; set; }
@@ -48,16 +48,17 @@ namespace ArenaStyleFlavorText
         public static int CastleSentTextCooldown { get; set; }
         public static int CastleWayTextCooldown { get; set; }
 
-        // Global Variables
-        public static ulong LastSeenShopText { get; set; }
-        public static ulong LastSeenTavernText { get; set; }
-        public static ulong LastSeenTempleText { get; set; }
-        public static ulong LastSeenMagesGuildText { get; set; }
-        public static ulong LastSeenPalaceText { get; set; }
-        public static ulong LastSeenCastleDFText { get; set; }
-        public static ulong LastSeenCastleSentText { get; set; }
-        public static ulong LastSeenCastleWayText { get; set; }
+        // Attached To SaveData
+        public static ulong lastSeenShopText = 0;
+        public static ulong lastSeenTavernText = 0;
+        public static ulong lastSeenTempleText = 0;
+        public static ulong lastSeenMagesGuildText = 0;
+        public static ulong lastSeenPalaceText = 0;
+        public static ulong lastSeenCastleDFText = 0;
+        public static ulong lastSeenCastleSentText = 0;
+        public static ulong lastSeenCastleWayText = 0;
 
+        // Global Variables
         public static float TextDelay { get; set; }
 
         PlayerEnterExit playerEnterExit = GameManager.Instance.PlayerEnterExit;
@@ -69,6 +70,7 @@ namespace ArenaStyleFlavorText
         {
             mod = initParams.Mod;
             instance = new GameObject("ArenaStyleFlavorText").AddComponent<ArenaStyleFlavorTextMain>(); // Add script to the scene.
+            mod.SaveDataInterface = instance;
 
             mod.LoadSettingsCallback = LoadSettings; // To enable use of the "live settings changes" feature in-game.
 
@@ -81,8 +83,6 @@ namespace ArenaStyleFlavorText
 
             mod.LoadSettings();
 
-            StartGameBehaviour.OnStartGame += ResetCooldownValues_OnStartGame;
-            SaveLoadManager.OnLoad += ResetCooldownValues_OnSaveLoad;
             PlayerEnterExit.OnTransitionInterior += ShowFlavorText_OnTransitionInterior;
             PlayerEnterExit.OnTransitionDungeonInterior += ShowFlavorText_OnTransitionDungeonInterior;
 
@@ -93,6 +93,9 @@ namespace ArenaStyleFlavorText
 
         static void LoadSettings(ModSettings modSettings, ModSettingsChange change)
         {
+            TextDisplayType = mod.GetSettings().GetValue<int>("GeneralSettings", "DisplayType");
+            MinDisplayDuration = mod.GetSettings().GetValue<int>("GeneralSettings", "MinDisplayTime");
+            MaxDisplayDuration = mod.GetSettings().GetValue<int>("GeneralSettings", "MaxDisplayTime");
             ShopTextCooldown = mod.GetSettings().GetValue<int>("FlavorTextFrequency", "ShopCooldown");
             TavernTextCooldown = mod.GetSettings().GetValue<int>("FlavorTextFrequency", "TavernCooldown");
             TempleTextCooldown = mod.GetSettings().GetValue<int>("FlavorTextFrequency", "TempleCooldown");
@@ -104,30 +107,6 @@ namespace ArenaStyleFlavorText
         }
 
         #endregion
-
-        static void ResetCooldownValues_OnStartGame(object sender, EventArgs e)
-        {
-            LastSeenShopText = 0;
-            LastSeenTavernText = 0;
-            LastSeenTempleText = 0;
-            LastSeenMagesGuildText = 0;
-            LastSeenPalaceText = 0;
-            LastSeenCastleDFText = 0;
-            LastSeenCastleSentText = 0;
-            LastSeenCastleWayText = 0;
-        }
-
-        static void ResetCooldownValues_OnSaveLoad(SaveData_v1 saveData)
-        {
-            LastSeenShopText = 0;
-            LastSeenTavernText = 0;
-            LastSeenTempleText = 0;
-            LastSeenMagesGuildText = 0;
-            LastSeenPalaceText = 0;
-            LastSeenCastleDFText = 0;
-            LastSeenCastleSentText = 0;
-            LastSeenCastleWayText = 0;
-        }
 
         public static TextFile.Token[] TextTokenFromRawString(string rawString)
         {
@@ -173,36 +152,12 @@ namespace ArenaStyleFlavorText
             ulong currentTimeSeconds = DaggerfallUnity.Instance.WorldTime.DaggerfallDateTime.ToSeconds(); // 15 * 86400 = Number of seconds in 15 days.
 
             TextFile.Token[] tokens = null;
-            // Add another settings that allows for non-HUD text to display and instead use the "pausing messagebox" like the quest pack originally did.
-            // Also add setting for the text reading delay thing.
-            // Continue on this tomorrow, make the new mod name and change file names and add the settings that are still missing then more testing. Start getting closer to this being ready to release.
-
-
-            // Just going to have some testing stuff for trying to mess with text-string and stuff here, completely temporary stuff.
-            TextFile.Token[] tokenTest = null;
-
-            string inputString = "You enter the audience chamber of " + CityName() + "'s lord. Despite the season, not a ray of sunshine has touched this room. You breath in the musty air and wipe the sweat from your brow as you wait for the lord to finish business with some messengers from " + RemoteTown() + ". The behavior between the lord and the messengers is peculiar, considering the two have been at peace for some time...";
-
-            tokenTest = TextTokenFromRawString(inputString);
-
-            if (tokenTest != null)
-            {
-                DaggerfallUI.AddHUDText(tokenTest, TextDelay);
-
-                /*DaggerfallMessageBox textBox = new DaggerfallMessageBox(DaggerfallUI.UIManager, DaggerfallUI.UIManager.TopWindow);
-                textBox.SetTextTokens(tokenTest);
-                textBox.ClickAnywhereToClose = true;
-                textBox.Show();*/
-            }
-
-            return;
-            // Testing Stuff Ends Here
 
             if (playerEnterExit.IsPlayerInside)
             {
-                if (playerEnterExit.IsPlayerInsideOpenShop && BuildingOpenCheck(buildingType, buildingData) && (currentTimeSeconds - LastSeenShopText) > 86400 * (uint)ShopTextCooldown) // Complete, just needs vampire variants later.
+                if (playerEnterExit.IsPlayerInsideOpenShop && BuildingOpenCheck(buildingType, buildingData) && (currentTimeSeconds - lastSeenShopText) > 86400 * (uint)ShopTextCooldown)
                 {
-                    LastSeenShopText = currentTimeSeconds;
+                    lastSeenShopText = currentTimeSeconds;
 
                     switch (playerGPS.ClimateSettings.ClimateType)
                     {
@@ -341,9 +296,9 @@ namespace ArenaStyleFlavorText
                             } break;
                     }
                 }
-                else if (playerEnterExit.IsPlayerInsideTavern && (currentTimeSeconds - LastSeenTavernText) > 86400 * (uint)TavernTextCooldown)
+                else if (playerEnterExit.IsPlayerInsideTavern && (currentTimeSeconds - lastSeenTavernText) > 86400 * (uint)TavernTextCooldown)
                 {
-                    LastSeenTavernText = currentTimeSeconds;
+                    lastSeenTavernText = currentTimeSeconds;
 
                     switch (playerGPS.ClimateSettings.ClimateType)
                     {
@@ -482,9 +437,9 @@ namespace ArenaStyleFlavorText
                             } break;
                     }
                 }
-                else if (playerEnterExit.BuildingDiscoveryData.buildingType == DFLocation.BuildingTypes.Temple && (currentTimeSeconds - LastSeenTempleText) > 86400 * (uint)TempleTextCooldown)
+                else if (playerEnterExit.BuildingDiscoveryData.buildingType == DFLocation.BuildingTypes.Temple && (currentTimeSeconds - lastSeenTempleText) > 86400 * (uint)TempleTextCooldown)
                 {
-                    LastSeenTempleText = currentTimeSeconds;
+                    lastSeenTempleText = currentTimeSeconds;
 
                     switch (playerGPS.ClimateSettings.ClimateType)
                     {
@@ -623,9 +578,9 @@ namespace ArenaStyleFlavorText
                             } break;
                     }
                 }
-                else if (playerEnterExit.BuildingDiscoveryData.buildingType == DFLocation.BuildingTypes.GuildHall && playerEnterExit.BuildingDiscoveryData.factionID == (int)FactionFile.FactionIDs.The_Mages_Guild && BuildingOpenCheck(buildingType, buildingData) && (currentTimeSeconds - LastSeenMagesGuildText) > 86400 * (uint)MagesGuildTextCooldown)
+                else if (playerEnterExit.BuildingDiscoveryData.buildingType == DFLocation.BuildingTypes.GuildHall && playerEnterExit.BuildingDiscoveryData.factionID == (int)FactionFile.FactionIDs.The_Mages_Guild && BuildingOpenCheck(buildingType, buildingData) && (currentTimeSeconds - lastSeenMagesGuildText) > 86400 * (uint)MagesGuildTextCooldown)
                 {
-                    LastSeenMagesGuildText = currentTimeSeconds;
+                    lastSeenMagesGuildText = currentTimeSeconds;
 
                     switch (playerGPS.ClimateSettings.ClimateType)
                     {
@@ -808,9 +763,9 @@ namespace ArenaStyleFlavorText
                             } break;
                     }
                 }
-                else if (playerEnterExit.BuildingDiscoveryData.buildingType == DFLocation.BuildingTypes.Palace && BuildingOpenCheck(buildingType, buildingData) && (currentTimeSeconds - LastSeenPalaceText) > 86400 * (uint)PalaceTextCooldown)
+                else if (playerEnterExit.BuildingDiscoveryData.buildingType == DFLocation.BuildingTypes.Palace && BuildingOpenCheck(buildingType, buildingData) && (currentTimeSeconds - lastSeenPalaceText) > 86400 * (uint)PalaceTextCooldown)
                 {
-                    LastSeenPalaceText = currentTimeSeconds;
+                    lastSeenPalaceText = currentTimeSeconds;
 
                     switch (playerGPS.ClimateSettings.ClimateType)
                     {
@@ -950,8 +905,27 @@ namespace ArenaStyleFlavorText
                     }
                 }
             }
+
             if (tokens != null)
-                DaggerfallUI.AddHUDText(tokens, 20.00f);
+            {
+                if (MinDisplayDuration != 0 && TextDelay < MinDisplayDuration) // If not set to 0, the minimum number of seconds a message can show for
+                    TextDelay = MinDisplayDuration;
+
+                if (MaxDisplayDuration != 0 && TextDelay > MaxDisplayDuration) // If not set to 0, the maximum number of seconds a message can show for
+                    TextDelay = MaxDisplayDuration;
+
+                if (TextDisplayType == 0) // For HUD display of text
+                {
+                    DaggerfallUI.AddHUDText(tokens, TextDelay);
+                }
+                else // For MessageBox display of text
+                {
+                    DaggerfallMessageBox textBox = new DaggerfallMessageBox(DaggerfallUI.UIManager, DaggerfallUI.UIManager.TopWindow);
+                    textBox.SetTextTokens(tokens);
+                    textBox.ClickAnywhereToClose = true;
+                    textBox.Show();
+                }
+            }
         }
 
         public void ShowFlavorText_OnTransitionDungeonInterior(PlayerEnterExit.TransitionEventArgs args)
@@ -965,9 +939,9 @@ namespace ArenaStyleFlavorText
 
             if (playerEnterExit.IsPlayerInside)
             {
-                if (playerGPS.CurrentRegionIndex == 17 && locationData.Name == "Daggerfall" && (currentTimeSeconds - LastSeenCastleDFText) > 86400 * (uint)CastleDFTextCooldown) // Daggerfall Region
+                if (playerGPS.CurrentRegionIndex == 17 && locationData.Name == "Daggerfall" && (currentTimeSeconds - lastSeenCastleDFText) > 86400 * (uint)CastleDFTextCooldown) // Daggerfall Region
                 {
-                    LastSeenCastleDFText = currentTimeSeconds;
+                    lastSeenCastleDFText = currentTimeSeconds;
 
                     switch (currentSeason)
                     {
@@ -1016,9 +990,9 @@ namespace ArenaStyleFlavorText
                             break;
                     }
                 }
-                else if (playerGPS.CurrentRegionIndex == 20 && locationData.Name == "Sentinel" && (currentTimeSeconds - LastSeenCastleSentText) > 86400 * (uint)CastleSentTextCooldown) // Sentinel Region
+                else if (playerGPS.CurrentRegionIndex == 20 && locationData.Name == "Sentinel" && (currentTimeSeconds - lastSeenCastleSentText) > 86400 * (uint)CastleSentTextCooldown) // Sentinel Region
                 {
-                    LastSeenCastleSentText = currentTimeSeconds;
+                    lastSeenCastleSentText = currentTimeSeconds;
 
                     switch (currentSeason)
                     {
@@ -1068,9 +1042,9 @@ namespace ArenaStyleFlavorText
                             break;
                     }
                 }
-                else if (playerGPS.CurrentRegionIndex == 23 && locationData.Name == "Wayrest" && (currentTimeSeconds - LastSeenCastleWayText) > 86400 * (uint)CastleWayTextCooldown) // Wayrest Region
+                else if (playerGPS.CurrentRegionIndex == 23 && locationData.Name == "Wayrest" && (currentTimeSeconds - lastSeenCastleWayText) > 86400 * (uint)CastleWayTextCooldown) // Wayrest Region
                 {
-                    LastSeenCastleWayText = currentTimeSeconds;
+                    lastSeenCastleWayText = currentTimeSeconds;
 
                     switch (currentSeason)
                     {
@@ -1120,8 +1094,27 @@ namespace ArenaStyleFlavorText
                     }
                 }
             }
+
             if (tokens != null)
-                DaggerfallUI.AddHUDText(tokens, 20.00f);
+            {
+                if (MinDisplayDuration != 0 && TextDelay < MinDisplayDuration) // If not set to 0, the minimum number of seconds a message can show for
+                    TextDelay = MinDisplayDuration;
+
+                if (MaxDisplayDuration != 0 && TextDelay > MaxDisplayDuration) // If not set to 0, the maximum number of seconds a message can show for
+                    TextDelay = MaxDisplayDuration;
+
+                if (TextDisplayType == 0) // For HUD display of text
+                {
+                    DaggerfallUI.AddHUDText(tokens, TextDelay);
+                }
+                else // For MessageBox display of text
+                {
+                    DaggerfallMessageBox textBox = new DaggerfallMessageBox(DaggerfallUI.UIManager, DaggerfallUI.UIManager.TopWindow);
+                    textBox.SetTextTokens(tokens);
+                    textBox.ClickAnywhereToClose = true;
+                    textBox.Show();
+                }
+            }
         }
 
         public bool BuildingOpenCheck(DFLocation.BuildingTypes buildingType, PlayerGPS.DiscoveredBuilding buildingData)
@@ -1173,5 +1166,70 @@ namespace ArenaStyleFlavorText
             else
                 return WeatherType.Sunny;
         }
+
+        #region SaveData Junk
+
+        public Type SaveDataType
+        {
+            get { return typeof(ArenaStyleFlavorTextSaveData); }
+        }
+
+        public object NewSaveData()
+        {
+            return new ArenaStyleFlavorTextSaveData
+            {
+                LastSeenShopText = 0,
+                LastSeenTavernText = 0,
+                LastSeenTempleText = 0,
+                LastSeenMagesGuildText = 0,
+                LastSeenPalaceText = 0,
+                LastSeenCastleDFText = 0,
+                LastSeenCastleSentText = 0,
+                LastSeenCastleWayText = 0
+            };
+        }
+
+        public object GetSaveData()
+        {
+            return new ArenaStyleFlavorTextSaveData
+            {
+                LastSeenShopText = lastSeenShopText,
+                LastSeenTavernText = lastSeenTavernText,
+                LastSeenTempleText = lastSeenTempleText,
+                LastSeenMagesGuildText = lastSeenMagesGuildText,
+                LastSeenPalaceText = lastSeenPalaceText,
+                LastSeenCastleDFText = lastSeenCastleDFText,
+                LastSeenCastleSentText = lastSeenCastleSentText,
+                LastSeenCastleWayText = lastSeenCastleWayText
+            };
+        }
+
+        public void RestoreSaveData(object saveData)
+        {
+            var arenaStyleFlavorTextSaveData = (ArenaStyleFlavorTextSaveData)saveData;
+            lastSeenShopText = arenaStyleFlavorTextSaveData.LastSeenShopText;
+            lastSeenTavernText = arenaStyleFlavorTextSaveData.LastSeenTavernText;
+            lastSeenTempleText = arenaStyleFlavorTextSaveData.LastSeenTempleText;
+            lastSeenMagesGuildText = arenaStyleFlavorTextSaveData.LastSeenMagesGuildText;
+            lastSeenPalaceText = arenaStyleFlavorTextSaveData.LastSeenPalaceText;
+            lastSeenCastleDFText = arenaStyleFlavorTextSaveData.LastSeenCastleDFText;
+            lastSeenCastleSentText = arenaStyleFlavorTextSaveData.LastSeenCastleSentText;
+            lastSeenCastleWayText = arenaStyleFlavorTextSaveData.LastSeenCastleWayText;
+        }
     }
+
+    [FullSerializer.fsObject("v1")]
+    public class ArenaStyleFlavorTextSaveData
+    {
+        public ulong LastSeenShopText;
+        public ulong LastSeenTavernText;
+        public ulong LastSeenTempleText;
+        public ulong LastSeenMagesGuildText;
+        public ulong LastSeenPalaceText;
+        public ulong LastSeenCastleDFText;
+        public ulong LastSeenCastleSentText;
+        public ulong LastSeenCastleWayText;
+    }
+
+    #endregion
 }

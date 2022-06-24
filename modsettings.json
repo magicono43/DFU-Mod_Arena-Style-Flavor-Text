@@ -1,6 +1,43 @@
 {
     "Version": "1.00",
     "Sections": [
+	{
+            "Name": "FlavorTextFrequency",
+            "Description": "Related To General Mod Settings",
+            "IsAdvanced": false,
+            "Keys": [
+				{
+                    "Options": [
+                        "HUD Text",
+                        "Message-Box Text"
+                    ],
+                    "Value": 0,
+                    "Name": "DisplayType",
+                    "Description": "In What Form You Want Text To Be Displayed.",
+                    "$version": "v1",
+                    "$type": "DaggerfallWorkshop.Game.Utility.ModSupport.ModSettings.MultipleChoiceKey"
+                },
+				{
+                    "Min": 0,
+                    "Max": 60,
+                    "Value": 0,
+                    "Name": "MinDisplayTime",
+                    "Description": "Minimum Seconds A Message Will Display For, 0 = Automatic.",
+                    "$version": "v1",
+                    "$type": "DaggerfallWorkshop.Game.Utility.ModSupport.ModSettings.SliderIntKey"
+                },
+                {
+                    "Min": 0,
+                    "Max": 60,
+                    "Value": 0,
+                    "Name": "MaxDisplayTime",
+                    "Description": "Maximum Seconds A Message Will Display For, 0 = Automatic.",
+                    "$version": "v1",
+                    "$type": "DaggerfallWorkshop.Game.Utility.ModSupport.ModSettings.SliderIntKey"
+                }
+            ],
+            "$version": "v1"
+        },
         {
             "Name": "FlavorTextFrequency",
             "Description": "Related To How Frequently Flavor Text Should Show Up",
