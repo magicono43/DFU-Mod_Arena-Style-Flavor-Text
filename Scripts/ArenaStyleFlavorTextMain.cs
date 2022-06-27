@@ -3,7 +3,7 @@
 // License:         MIT License (http://www.opensource.org/licenses/mit-license.php)
 // Author:          Kirk.O
 // Created On: 	    5/26/2022, 12:10 AM
-// Last Edit:		6/23/2022, 10:50 PM
+// Last Edit:		6/27/2022, 3:50 PM
 // Version:			1.00
 // Special Thanks:  Ted Peterson, Cliffworms, Kab the Bird Ranger, Jehuty, Ralzar, Kokytos, Hazelnut, and Interkarma
 // Modifier:
@@ -174,7 +174,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = HotFallShopText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotFallShopText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -184,7 +185,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = HotSpringShopText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotSpringShopText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -194,7 +196,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = HotSummerShopText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotSummerShopText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -205,8 +208,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotWinterShopText(2); break;
                                         case WeatherType.Snow: tokens = HotWinterShopText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                         case DFLocation.ClimateBaseType.Mountain:
                             switch (currentSeason)
                             {
@@ -219,7 +224,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainFallShopText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainFallShopText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -229,7 +235,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainSpringShopText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainSpringShopText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -239,7 +246,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainSummerShopText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainSummerShopText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -248,8 +256,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Overcast:
                                         case WeatherType.Fog: tokens = MountainWinterShopText(1); break;
                                         case WeatherType.Snow: tokens = MountainWinterShopText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                         case DFLocation.ClimateBaseType.Temperate:
                         default:
                             switch (currentSeason)
@@ -263,7 +273,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateFallShopText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateFallShopText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -273,7 +284,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateSpringShopText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateSpringShopText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -283,7 +295,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateSummerShopText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateSummerShopText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -292,8 +305,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Overcast:
                                         case WeatherType.Fog: tokens = TemperateWinterShopText(1); break;
                                         case WeatherType.Snow: tokens = TemperateWinterShopText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                     }
                 }
                 else if (playerEnterExit.IsPlayerInsideTavern && (currentTimeSeconds - lastSeenTavernText) > 86400 * (uint)TavernTextCooldown)
@@ -315,7 +330,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = HotFallTavernText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotFallTavernText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -325,7 +341,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = HotSpringTavernText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotSpringTavernText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -335,7 +352,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = HotSummerTavernText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotSummerTavernText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -346,8 +364,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotWinterTavernText(2); break;
                                         case WeatherType.Snow: tokens = HotWinterTavernText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                         case DFLocation.ClimateBaseType.Mountain:
                             switch (currentSeason)
                             {
@@ -360,7 +380,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainFallTavernText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainFallTavernText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -370,7 +391,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainSpringTavernText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainSpringTavernText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -380,7 +402,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainSummerTavernText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainSummerTavernText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -389,8 +412,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Overcast:
                                         case WeatherType.Fog: tokens = MountainWinterTavernText(1); break;
                                         case WeatherType.Snow: tokens = MountainWinterTavernText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                         case DFLocation.ClimateBaseType.Temperate:
                         default:
                             switch (currentSeason)
@@ -404,7 +429,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateFallTavernText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateFallTavernText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -414,7 +440,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateSpringTavernText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateSpringTavernText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -424,7 +451,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateSummerTavernText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateSummerTavernText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -433,8 +461,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Overcast:
                                         case WeatherType.Fog: tokens = TemperateWinterTavernText(1); break;
                                         case WeatherType.Snow: tokens = TemperateWinterTavernText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                     }
                 }
                 else if (playerEnterExit.BuildingDiscoveryData.buildingType == DFLocation.BuildingTypes.Temple && (currentTimeSeconds - lastSeenTempleText) > 86400 * (uint)TempleTextCooldown)
@@ -456,7 +486,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = HotFallTempleText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotFallTempleText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -466,7 +497,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = HotSpringTempleText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotSpringTempleText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -476,7 +508,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = HotSummerTempleText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotSummerTempleText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -487,8 +520,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotWinterTempleText(2); break;
                                         case WeatherType.Snow: tokens = HotWinterTempleText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                         case DFLocation.ClimateBaseType.Mountain:
                             switch (currentSeason)
                             {
@@ -501,7 +536,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainFallTempleText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainFallTempleText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -511,7 +547,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainSpringTempleText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainSpringTempleText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -521,7 +558,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainSummerTempleText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainSummerTempleText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -530,8 +568,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Overcast:
                                         case WeatherType.Fog: tokens = MountainWinterTempleText(1); break;
                                         case WeatherType.Snow: tokens = MountainWinterTempleText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                         case DFLocation.ClimateBaseType.Temperate:
                         default:
                             switch (currentSeason)
@@ -545,7 +585,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateFallTempleText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateFallTempleText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -555,7 +596,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateSpringTempleText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateSpringTempleText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -565,7 +607,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateSummerTempleText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateSummerTempleText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -574,8 +617,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Overcast:
                                         case WeatherType.Fog: tokens = TemperateWinterTempleText(1); break;
                                         case WeatherType.Snow: tokens = TemperateWinterTempleText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                     }
                 }
                 else if (playerEnterExit.BuildingDiscoveryData.buildingType == DFLocation.BuildingTypes.GuildHall && playerEnterExit.BuildingDiscoveryData.factionID == (int)FactionFile.FactionIDs.The_Mages_Guild && BuildingOpenCheck(buildingType, buildingData) && (currentTimeSeconds - lastSeenMagesGuildText) > 86400 * (uint)MagesGuildTextCooldown)
@@ -596,7 +641,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = DesertFallMagesText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = DesertFallMagesText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -606,7 +652,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = DesertSpringMagesText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = DesertSpringMagesText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -616,7 +663,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = DesertSummerMagesText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = DesertSummerMagesText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -627,8 +675,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = DesertWinterMagesText(2); break;
                                         case WeatherType.Snow: tokens = DesertWinterMagesText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                         case DFLocation.ClimateBaseType.Swamp:
                             switch (currentSeason)
                             {
@@ -641,7 +691,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = SwampFallMagesText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = SwampFallMagesText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -651,7 +702,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = SwampSpringMagesText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = SwampSpringMagesText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -661,7 +713,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = SwampSummerMagesText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = SwampSummerMagesText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -672,8 +725,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = SwampWinterMagesText(2); break;
                                         case WeatherType.Snow: tokens = SwampWinterMagesText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                         case DFLocation.ClimateBaseType.Mountain:
                             switch (currentSeason)
                             {
@@ -686,7 +741,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainFallMagesText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainFallMagesText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -696,7 +752,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainSpringMagesText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainSpringMagesText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -706,7 +763,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainSummerMagesText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainSummerMagesText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -715,8 +773,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Overcast:
                                         case WeatherType.Fog: tokens = MountainWinterMagesText(1); break;
                                         case WeatherType.Snow: tokens = MountainWinterMagesText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                         case DFLocation.ClimateBaseType.Temperate:
                         default:
                             switch (currentSeason)
@@ -730,7 +790,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateFallMagesText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateFallMagesText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -740,7 +801,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateSpringMagesText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateSpringMagesText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -750,7 +812,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateSummerMagesText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateSummerMagesText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -759,8 +822,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Overcast:
                                         case WeatherType.Fog: tokens = TemperateWinterMagesText(1); break;
                                         case WeatherType.Snow: tokens = TemperateWinterMagesText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                     }
                 }
                 else if (playerEnterExit.BuildingDiscoveryData.buildingType == DFLocation.BuildingTypes.Palace && BuildingOpenCheck(buildingType, buildingData) && (currentTimeSeconds - lastSeenPalaceText) > 86400 * (uint)PalaceTextCooldown)
@@ -782,7 +847,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = HotFallPalaceText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotFallPalaceText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -792,7 +858,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = HotSpringPalaceText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotSpringPalaceText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -802,7 +869,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = HotSummerPalaceText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotSummerPalaceText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -813,8 +881,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = HotWinterPalaceText(2); break;
                                         case WeatherType.Snow: tokens = HotWinterPalaceText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                         case DFLocation.ClimateBaseType.Mountain:
                             switch (currentSeason)
                             {
@@ -827,7 +897,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainFallPalaceText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainFallPalaceText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -837,7 +908,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainSpringPalaceText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainSpringPalaceText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -847,7 +919,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = MountainSummerPalaceText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = MountainSummerPalaceText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -856,8 +929,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Overcast:
                                         case WeatherType.Fog: tokens = MountainWinterPalaceText(1); break;
                                         case WeatherType.Snow: tokens = MountainWinterPalaceText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                         case DFLocation.ClimateBaseType.Temperate:
                         default:
                             switch (currentSeason)
@@ -871,7 +946,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateFallPalaceText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateFallPalaceText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Spring:
                                     switch (weatherType)
                                     {
@@ -881,7 +957,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateSpringPalaceText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateSpringPalaceText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Summer:
                                     switch (weatherType)
                                     {
@@ -891,7 +968,8 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Fog: tokens = TemperateSummerPalaceText(1); break;
                                         case WeatherType.Rain:
                                         case WeatherType.Thunder: tokens = TemperateSummerPalaceText(2); break;
-                                    } break;
+                                    }
+                                    break;
                                 case DaggerfallDateTime.Seasons.Winter:
                                     switch (weatherType)
                                     {
@@ -900,8 +978,10 @@ namespace ArenaStyleFlavorText
                                         case WeatherType.Overcast:
                                         case WeatherType.Fog: tokens = TemperateWinterPalaceText(1); break;
                                         case WeatherType.Snow: tokens = TemperateWinterPalaceText(3); break;
-                                    } break;
-                            } break;
+                                    }
+                                    break;
+                            }
+                            break;
                     }
                 }
             }

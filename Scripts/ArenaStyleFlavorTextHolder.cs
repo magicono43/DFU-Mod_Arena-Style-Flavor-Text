@@ -726,6 +726,8 @@ namespace ArenaStyleFlavorText
                     raw = "On this cold autumn night, " + BuildName() + " seems especially inviting. You smell apples baking in the kitchen and look forward to your first serving of " + RandomAlcohol() + "...";
                 else
                     raw = "The warm smells of tobacco smoke and simple foods draw you into " + BuildName() + " from the cold autumn night...";
+
+                return TextTokenFromRawString(raw);
             }
 
             if (weatherID == 1) // Cloudy
@@ -776,6 +778,8 @@ namespace ArenaStyleFlavorText
                     raw = BuildName() + " is like a beacon in the cool spring night, full of torch light, clinking glasses, and the aromas of the kitchen...";
                 else
                     raw = "It is a cool spring night outside, but you have no need to seek out the fireplace on entering " + BuildName() + ". The tobacco smoke and smell of new bread trickles out the open windows and into the night...";
+
+                return TextTokenFromRawString(raw);
             }
 
             if (weatherID == 1) // Cloudy
@@ -826,6 +830,8 @@ namespace ArenaStyleFlavorText
                     raw = "The heat and humidity of the day have disappeared, and it has turned out to be a rather cold night. The torches on the walls of " + BuildName() + " light up many a sunburned face...";
                 else
                     raw = "The summer night is colder as the day had been, and you enter " + BuildName() + " craving something warm and dry...";
+
+                return TextTokenFromRawString(raw);
             }
 
             if (weatherID == 1) // Cloudy
@@ -871,6 +877,8 @@ namespace ArenaStyleFlavorText
                     raw = BuildName() + " seems to be the last bastion of warmth and light against the desertic darkness outside...";
                 else
                     raw = "Rubbing your hands briskly together, you enter " + BuildName() + ". The fireplace is so grand in the room, in short time you feel almost too warm...";
+
+                return TextTokenFromRawString(raw);
             }
 
             if (weatherID == 1) // Cloudy
@@ -930,6 +938,8 @@ namespace ArenaStyleFlavorText
                     raw = "On this cold autumn night, " + BuildName() + " seems especially inviting. You smell apples baking in the kitchen and look forward to your first serving of " + RandomAlcohol() + "...";
                 else
                     raw = "The warm smells of tobacco smoke and simple foods draw you into " + BuildName() + " from the cold autumn night...";
+
+                return TextTokenFromRawString(raw);
             }
 
             if (weatherID == 1) // Cloudy
@@ -980,6 +990,8 @@ namespace ArenaStyleFlavorText
                     raw = BuildName() + " is like a beacon in the cool spring night, full of torch light, clinking glasses, and the aromas of the kitchen...";
                 else
                     raw = "It is a cool spring night outside, but you have no need to seek out the fireplace on entering " + BuildName() + ". The tobacco smoke and smell of new bread trickles out the open windows and into the night...";
+
+                return TextTokenFromRawString(raw);
             }
 
             if (weatherID == 1) // Cloudy
@@ -1030,6 +1042,8 @@ namespace ArenaStyleFlavorText
                     raw = "The wind and chill of the day have disappeared, and it has turned out to be a pleasantly cool night. The torches on the walls of " + BuildName() + " light up many a face...";
                 else
                     raw = "The summer night is colder than the day had been, and you enter " + BuildName() + " craving something warm and dry...";
+
+                return TextTokenFromRawString(raw);
             }
 
             if (weatherID == 1) // Cloudy
@@ -1080,6 +1094,8 @@ namespace ArenaStyleFlavorText
                     raw = BuildName() + " seems to be the last bastion of warmth and light against the arctic darkness outside...";
                 else
                     raw = "Rubbing your hands briskly together, you enter " + BuildName() + ". The fireplace is so grand in the room, in short time you feel almost too warm...";
+
+                return TextTokenFromRawString(raw);
             }
 
             if (weatherID == 1) // Cloudy
@@ -1130,6 +1146,8 @@ namespace ArenaStyleFlavorText
                     raw = "On this cool autumn night, " + BuildName() + " seems especially inviting. You smell apples baking in the kitchen and look forward to your first serving of " + RandomAlcohol() + "...";
                 else
                     raw = "The warm smells of tobacco smoke and simple foods draw you into " + BuildName() + " from the cold autumn night...";
+
+                return TextTokenFromRawString(raw);
             }
 
             if (weatherID == 1) // Cloudy
@@ -1180,6 +1198,8 @@ namespace ArenaStyleFlavorText
                     raw = BuildName() + " is like a beacon in the cool spring night, full of torch light, clinking glasses, and the aromas of the kitchen...";
                 else
                     raw = "It is a cool spring night outside, but you have no need to seek out the fireplace on entering " + BuildName() + ". The tobacco smoke and smell of new bread trickles out the open windows and into the night...";
+
+                return TextTokenFromRawString(raw);
             }
 
             if (weatherID == 1) // Cloudy
@@ -1230,6 +1250,8 @@ namespace ArenaStyleFlavorText
                     raw = "The heat and humidity of the day have disappeared, and it has turned out to be a pleasantly cool night. The torches on the walls of " + BuildName() + " light up many a sunburned face...";
                 else
                     raw = "The summer night is almost as warm as the day had been, and you enter " + BuildName() + " craving something cold and wet...";
+
+                return TextTokenFromRawString(raw);
             }
 
             if (weatherID == 1) // Cloudy
@@ -1275,6 +1297,8 @@ namespace ArenaStyleFlavorText
                     raw = BuildName() + " seems to be the last bastion of warmth and light against the arctic darkness outside...";
                 else
                     raw = "Rubbing your hands briskly together, you enter " + BuildName() + ". The fireplace is so grand in the room, in short time you feel almost too warm...";
+
+                return TextTokenFromRawString(raw);
             }
 
             if (weatherID == 1) // Cloudy
@@ -3081,7 +3105,7 @@ namespace ArenaStyleFlavorText
             if (weatherID == 1) // Cloudy
             {
                 if (variant == 0)
-                    raw = "You walk into the " + RegentTitle() + "'s audience chamber, noticing the many fine trappings and furniture that decorate the area. The chilling temperature and iron gray clouds outside have made everything dull, though you find that the interior of this chamber is brightly lit and cheerful. Somewhere within waits " + RegentTitle() + " of " + CityName() + "...";
+                    raw = "You walk into the " + RegentTitle() + "'s audience chamber, noticing the many fine trappings and furniture that decorate the area. The chilling temperature and iron gray clouds outside have made everything dull, though you find that the interior of this chamber is brightly lit and cheerful. Somewhere within waits the " + RegentTitle() + " of " + CityName() + "...";
                 else if (variant == 1)
                     raw = "Chilled by the cool air outside, you stumble into " + RegentName() + "'s audience chamber, only to feel a colder chill that pierces your soul. The room itself is physically warm and pleasing to the eye, but you sense an undercurrent of tension...";
                 else
@@ -3105,7 +3129,7 @@ namespace ArenaStyleFlavorText
                 else if (variant == 2)
                     raw = "You enter " + RegentName() + "'s audience chamber, your flesh scorched by the sun. Representatives from Wayrest, which were meeting with the " + RegentTitle() + ", leave the room as you enter. It appears things have gone well, for the Council of Elders and the " + RegentTitle() + " seem to be in a good mood...";
                 else
-                    raw = "You walk into the " + RegentTitle() + "'s audience chamber, noticing the many fine trappings and furniture that decorate the area. Even though the sun outside is bright and strong, this season's slightly colder temperatures have chilled your skin. You find that you welcome the well lit and warm interior. Somewhere within waits " + RegentName() + ", " + RegentTitle() + " of " + CityName() + "...";
+                    raw = "You walk into the " + RegentTitle() + "'s audience chamber, noticing the many fine trappings and furniture that decorate the area. Even though the sun outside is bright and strong, this season's slightly colder temperatures have chilled your skin. You find that you welcome the well lit and warm interior. Somewhere within waits the " + RegentName() + ", " + RegentTitle() + " of " + CityName() + "...";
             }
             return TextTokenFromRawString(raw);
         }

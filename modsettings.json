@@ -2,7 +2,7 @@
     "Version": "1.00",
     "Sections": [
 	{
-            "Name": "FlavorTextFrequency",
+            "Name": "GeneralSettings",
             "Description": "Related To General Mod Settings",
             "IsAdvanced": false,
             "Keys": [
