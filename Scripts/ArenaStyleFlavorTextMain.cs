@@ -63,7 +63,6 @@ namespace ArenaStyleFlavorText
 
         PlayerEnterExit playerEnterExit = GameManager.Instance.PlayerEnterExit;
         PlayerGPS playerGPS = GameManager.Instance.PlayerGPS;
-        DaggerfallDateTime.Seasons currentSeason = DaggerfallUnity.Instance.WorldTime.Now.SeasonValue;
 
         [Invoke(StateManager.StateTypes.Start, 0)]
         public static void Init(InitParams initParams)
@@ -146,6 +145,7 @@ namespace ArenaStyleFlavorText
         public void ShowFlavorText_OnTransitionInterior(PlayerEnterExit.TransitionEventArgs args)
         {
             WeatherType weatherType = GetCurrentWeatherType();
+            DaggerfallDateTime.Seasons currentSeason = DaggerfallUnity.Instance.WorldTime.Now.SeasonValue;
             DFLocation.BuildingTypes buildingType = playerEnterExit.BuildingDiscoveryData.buildingType;
             PlayerGPS.DiscoveredBuilding buildingData = playerEnterExit.BuildingDiscoveryData;
 
@@ -1011,6 +1011,7 @@ namespace ArenaStyleFlavorText
         public void ShowFlavorText_OnTransitionDungeonInterior(PlayerEnterExit.TransitionEventArgs args)
         {
             WeatherType weatherType = GetCurrentWeatherType();
+            DaggerfallDateTime.Seasons currentSeason = DaggerfallUnity.Instance.WorldTime.Now.SeasonValue;
             DFLocation locationData = GameManager.Instance.PlayerGPS.CurrentLocation;
 
             ulong currentTimeSeconds = DaggerfallUnity.Instance.WorldTime.DaggerfallDateTime.ToSeconds(); // 15 * 86400 = Number of seconds in 15 days.
